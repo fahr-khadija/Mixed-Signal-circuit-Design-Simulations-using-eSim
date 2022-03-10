@@ -29,11 +29,11 @@ First I  design the 2 analog  circuis and simulate them after I simulate the tlv
 
 
 ##    flow design & simulation 
-	Step 1 : 		  simulate th verilog file of Fahr_rvmyth and simulate it  on Makerchip
+	Step 1 : 		simulate th verilog file of Fahr_rvmyth and simulate it  on Makerchip
 
 •	Step 2 : 		Model creation on NgVeri
 
-•	Step 3 :		Schematics creation 
+•	Step 3 :		Schematics creation of reference circuit 
 
 •	Step 4 :		Creating Netlist
 
@@ -87,8 +87,13 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 ## * Design schematic
 ## * Setting 
 ## * Simulation 
-## * Netlist of the Circuits
-## What is RVMYTH
+
+
+REFERENCES
+[1]	https://github.com/vsdip/rvmyth_avsddac_interface
+[2]	https://github.com/vsdip/rvmyth_avsdpll_interface
+[3]	https://esim.fossee.in/circuit-simulation-project/esim-circuit-simulation-run
+[4]	https://hackathon.fossee.in/esim/ 
 
 
 
