@@ -16,6 +16,7 @@
   * [* Setting](#--setting)
   * [* Simulation](#--simulation)
   
+- [III.   REFERENCES](#iii---references)
 
 
 
@@ -81,6 +82,12 @@ https://www.veripool.org/verilator/
 It s based on RVMYTH core which  is a simple RISCV-based CPU, introduced in a workshop by RedwoodEDA and VSD. 
 
  [Here](https://github.com/shivanishah269/risc-v-core) is the repo we used as a reference to model the RVMYTH
+ 
+
+## fahr_rvmyth.tlv
+
+<img width="359" alt="module fahr_rvmyth_tlv" src="https://user-images.githubusercontent.com/100168693/157906865-a32c02ad-b808-411b-b952-3a5255756ddb.png">
+
  
 I used the tlv code for rvmyth and edit it succesefly by makerchip .
 
@@ -156,10 +163,26 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 
 ![image](https://user-images.githubusercontent.com/100168693/157732186-dc5a6023-fa7a-44d0-9df3-8d18f5f1753f.png)
 
+You can change the sitting to show more detail 
+
+
+## v out and v clk of mixed circuit of 2000ms simulation time
+
+![v out and v clk of mixed circuit of 2000ms simulation time ](https://user-images.githubusercontent.com/100168693/157906288-e10d3092-063f-4620-8c96-364fb8399b8b.jpeg)
+
+
+## v out and v clk of mixed circuit of 100ms simulation time
+
+![v out and v clk of mixed circuit of 100ms simulation time ](https://user-images.githubusercontent.com/100168693/157906469-981ef257-5815-48ec-af1f-16aa30b38e9d.jpeg)
 
 
 
-## * REFERENCES
+<img width="821" alt="v clk of mixed circuit of 100ms simulation time  jpeg" src="https://user-images.githubusercontent.com/100168693/157906630-c9d0130e-aede-406e-bc6b-868c32899b6e.png">
+
+
+
+# III.   REFERENCES
+
 ### [1]	https://github.com/vsdip/rvmyth_avsddac_interface
 ### [2]	https://github.com/vsdip/rvmyth_avsdpll_interface
 ### [3]	https://esim.fossee.in/circuit-simulation-project/esim-circuit-simulation-run
