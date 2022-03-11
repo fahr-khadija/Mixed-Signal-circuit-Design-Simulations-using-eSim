@@ -10,9 +10,10 @@
   * [flow design and simulation](#flow-design-and-simulation)
   * [Overview of EDA Tool Used](#overview-of-eda-tool-used)
   * [Circuits Used](#circuits--used)
-    ** [1 *Fahr_rvmyth* circuit](#1--fahr-rvmyth--circuit)
-    ** [2 *Fahr_clk_gen* Circuit](#2--fahr-clk-gen--circuit)
-    ** [3 *Fahr_10bit_DAC* Circuit](#3--fahr-10bit-dac--circuit)
+  
+     ##### [1 *Fahr_rvmyth* circuit](#1--fahr-rvmyth--circuit)
+     ##### [2 *Fahr_clk_gen* Circuit](#2--fahr-clk-gen--circuit)
+     ##### [3 *Fahr_10bit_DAC* Circuit](#3--fahr-10bit-dac--circuit)
   
 - [II.   DESIGN & SIMULATION OF REFERENCE CIRCUIT](#ii---design---simulation-of-reference-circuit)
 
@@ -35,27 +36,26 @@ First I  design the 2 analog  circuis and simulate them after I simulate the tlv
 
 
 
-
 ##    flow design & simulation 
 
 
-### •	Step 1 : 		simulate th verilog file of digital circuit *Fahr_rvmyth* and simulate it  on Makerchip
+  ### Step 1 : 		simulate th verilog file of digital circuit **Fahr_rvmyth** and simulate it  on Makerchip
 
-### •	Step 2 : 		Model creation on NgVeri
+  ### Step 2 : 		Model creation on NgVeri
 
-### •	Step 3 :		Schematics creation of  Analog circuit 
+  ### Step 3 :		 Schematics creation of  Analog circuit **Fahr_clk_gen** & **Fahr_10bit_DAC**
 
-### •	Step 4 :		Creating Netlist
+  ### Step 4 :		 Creating Netlist
 
-### •	Step 5 :		Setting simulation instance parameters on KicadToNgspice converter
+  ### Step 5 :		 Setting simulation instance parameters on KicadToNgspice converter
 
-### •	Step 6: 		Simulation & Verification of results
+  ### Step 6: 		 Simulation & Verification of results
 
-### •	Step 7: 		Schematics creation of  Mixed signal  circuit **Reference Circuit** 
+  ### Step 7: 		 Schematics creation of  Mixed signal  circuit **Reference Circuit** 
 
-### •	Step 8 :		Setting simulation instance parameters on KicadToNgspice converter
+  ### Step 8 :	 	Setting simulation instance parameters on KicadToNgspice converter
 
-### •	Step 9 : 		Simulation & Verification of results
+  ### Step 9 : 		Simulation & Verification of results
 
 
 
@@ -92,19 +92,20 @@ https://www.veripool.org/verilator/
 
 ##    Circuits Used
 
-### 1 *Fahr_rvmyth* circuit
+  ### 1 *Fahr_rvmyth* circuit
 
 It s based on RVMYTH core which  is a simple RISCV-based CPU, introduced in a workshop by RedwoodEDA and VSD. 
 
  [Here](https://github.com/shivanishah269/risc-v-core) is the repo we used as a reference to model the RVMYTH
  
 
-**fahr_rvmyth.tlv**
+   **fahr_rvmyth.tlv**
 
 <img width="359" alt="module fahr_rvmyth_tlv" src="https://user-images.githubusercontent.com/100168693/157906865-a32c02ad-b808-411b-b952-3a5255756ddb.png">
 
  
 I used the tlv code for rvmyth and edit it succesefly by makerchip .
+
 
  ![image](https://user-images.githubusercontent.com/100168693/157900373-dd35ae10-8f35-41dc-bfdb-145b208b4898.png)
  
@@ -121,25 +122,37 @@ I run verilog to NgSpice Converter to create the model *fahr_rvmyth*
 
 
 
-## 2 *Fahr_clk_gen* Circuit
+  ## 2 *Fahr_clk_gen* Circuit
 
   It is a analog system that generates an output analog signal of clk  including **Pulse clock generation** subchip .
  
- **Schematic**
+   **Schematic**
+     
   I design a circuit to generate the clk signal by using the subchip clk_pulse_generator from eSim componant library , I generate a verilog module for *Fahr_clk-Gen* 
   
- ![image](https://user-images.githubusercontent.com/100168693/157898740-2dd2f6f8-53d1-4550-9041-563e5e67019e.png)
+  
+  ![image](https://user-images.githubusercontent.com/100168693/157898740-2dd2f6f8-53d1-4550-9041-563e5e67019e.png)
 
+  
+  
   I put  R1=R2=20K,Vdd=10V,C=0.1u for Simulation the analog output  v(clk)&v(c_out) 
+  
+  
   v(c_out) the plot at the out of capacitor 
  
-**Simulation**
-  ![image](https://user-images.githubusercontent.com/100168693/157899692-51925e6d-af4f-4199-9035-f2db586ef0f3.png)
+   **Simulation**
+   
+   ![v(clk) v(out) of clk gen cir](https://user-images.githubusercontent.com/100168693/157913805-f2633a8b-6a07-4638-a266-48dc1e74614d.jpeg)
+
+
+
+
  
 
 
 
 ## 3 *Fahr_10bit_DAC* Circuit 
+
 A digital-to-analog converter or DAC is a system that converts a digital signal into an analog signal. DACs are widely used in modern communication systems enabling the generation of digitally-defined transmission signals. As a result, high-speed DACs are used for mobile communications and ultra-high-speed DACs are employed in optical communications systems.
 
  I used the subship 10bit_DAC from library to generate a Netlist verilog module of  DAC and obtain the analog v(out) for digital inputs to test it.       
@@ -148,7 +161,14 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 
 ![image](https://user-images.githubusercontent.com/100168693/157731765-49ef2d84-3418-46ea-8ee0-9b800872bf87.png)
 
+  **setting**
+  
+![kicad to ngspice of fahr_cad](https://user-images.githubusercontent.com/100168693/157913649-2cdc0f6f-c9bf-49c8-bdc7-2b1f45e1dbb1.jpeg)
+
+  
+
   **Calcul**
+  
 
 ![image](https://user-images.githubusercontent.com/100168693/157731702-384e53de-f0ea-4bb4-8616-d61b5cb57a00.png)
 
@@ -169,8 +189,15 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 
 
 ## * Setting 
+ Analysis type
+ 
 ![image](https://user-images.githubusercontent.com/100168693/157732052-8f694cea-5430-4a52-a313-c4db04f7dc39.png)
+
+source detail
+
 ![image](https://user-images.githubusercontent.com/100168693/157732080-c145a2da-6337-4009-a76a-9ffba3919b22.png)
+
+add Subchips
 
 ![image](https://user-images.githubusercontent.com/100168693/157732108-e50d27c1-ebce-428f-8df7-db77aea2a817.png)
 
@@ -181,7 +208,7 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 
 ![image](https://user-images.githubusercontent.com/100168693/157732186-dc5a6023-fa7a-44d0-9df3-8d18f5f1753f.png)
 
-You can change the sitting to show more detail 
+You can change the setting to show more details 
 
 
 ## * v out and v clk of mixed circuit of 2000ms simulation time
@@ -197,6 +224,8 @@ You can change the sitting to show more detail
 ## * v clk of mixed circuit of 100ms simulation time
 
 <img width="821" alt="v clk of mixed circuit of 100ms simulation time  jpeg" src="https://user-images.githubusercontent.com/100168693/157906630-c9d0130e-aede-406e-bc6b-868c32899b6e.png">
+
+
 
 
 
