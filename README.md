@@ -8,16 +8,14 @@
 - [I.    REFERENCE CIRCUIT](#i----reference-circuit)
   * [flow design and simulation](#flow-design-and-simulation)
   * [Overview of EDA Tool Used](#overview-of-eda-tool-used)
-  * [1 *Fahr_clk_gen* Circuit](#1--fahr-clk-gen--circuit)
-  * [2 *Fahr_rvmyth* circuit](#2--fahr-rvmyth--circuit)
+  * [1 *Fahr_rvmyth* circuit](#1--fahr-rvmyth--circuit)
+  * [2 *Fahr_clk_gen* Circuit](#2--fahr-clk-gen--circuit)
   * [3 *Fahr_10bit_DAC* Circuit](#3--fahr-10bit-dac--circuit)
 - [II.   DESIGN & SIMULATION OF REFERENCE CIRCUIT](#ii---design---simulation-of-reference-circuit)
   * [* Design schematic](#--design-schematic)
   * [* Setting](#--setting)
   * [* Simulation](#--simulation)
-  * [* Netlist of the Circuits](#--netlist-of-the-circuits)
-
-
+  
 
 
 
@@ -25,23 +23,29 @@
 # I.	REFERENCE CIRCUIT
  My reference circuit is a mixed-signal SoC including 2 analog circuits *Fahr_clk-gen* & *Fahr_10bitDac and a digital RISCV-based processor named *Fahr_rvmyth*.
 First I  design the 2 analog  circuis and simulate them after I simulate the tlv code of my digital circuit  by Makerchip and create  it s model by Ngveri  Finally I implement my reference mixed signal circuit and simulate it with eSim
-![image](https://user-images.githubusercontent.com/100168693/157731054-17cf84d5-b818-47f8-b2eb-ef22bdf7bf89.png)
+
+
+![image](https://user-images.githubusercontent.com/100168693/157901148-fd9aa3e2-e069-47a7-b5e4-b82d463aca70.png)
+
 
 
 
 
 ##    flow design & simulation 
-	Step 1 : 		simulate th verilog file of Fahr_rvmyth and simulate it  on Makerchip
 
-•	Step 2 : 		Model creation on NgVeri
 
-•	Step 3 :		Schematics creation of reference circuit 
+######  •	Step 1 : 		simulate th verilog file of digital circuit *Fahr_rvmyth* and simulate it  on Makerchip
 
-•	Step 4 :		Creating Netlist
+### •	Step 2 : 		Model creation on NgVeri
 
-•	Step 5 :		Setting simulation instance parameters on KicadToNgspice converter
+### •	Step 3 :		Schematics creation of  3 analog circuit 
 
-•	Step 6: 		Simulation & Verification of results
+### •	Step 4 :		Creating Netlist
+
+### •	Step 5 :		Setting simulation instance parameters on KicadToNgspice converter
+
+### •	Step 6: 		Simulation & Verification of results
+
 
 ##    Overview of  EDA Tools Used 
 
@@ -72,38 +76,62 @@ It is a tool which converts Verilog code to C++ objects. For more details refer:
 https://www.veripool.org/verilator/
 
 
-## 1 *Fahr_clk_gen* Circuit  
-is a control system that generates an output signal including clock generation and distribution.
+## 1*Fahr_rvmyth* circuit
 
-![image](https://user-images.githubusercontent.com/100168693/157731137-2806bef2-effe-4ac3-b7af-e2cbac421b4c.png)
-![image](https://user-images.githubusercontent.com/100168693/157731178-d42d5126-e60b-44e1-ae4b-3050a405c7bb.png)
+It s based on RVMYTH core which  is a simple RISCV-based CPU, introduced in a workshop by RedwoodEDA and VSD. 
 
-
-## 2 *Fahr_rvmyth* circuit
-it s based on RVMYTH core which  is a simple RISCV-based CPU, introduced in a workshop by RedwoodEDA and VSD. 
  [Here](https://github.com/shivanishah269/risc-v-core) is the repo we used as a reference to model the RVMYTH
  
+I used the tlv code for rvmyth and edit it succesefly by makerchip .
+
+ ![image](https://user-images.githubusercontent.com/100168693/157900373-dd35ae10-8f35-41dc-bfdb-145b208b4898.png)
  
-![image](https://user-images.githubusercontent.com/100168693/157731250-9c495588-d257-4ff7-953b-a320c4ac997c.png)
+ 
+![image](https://user-images.githubusercontent.com/100168693/157900550-52bc2dbd-b161-4450-9dc4-6aa925fce4f0.png)
 
-![image](https://user-images.githubusercontent.com/100168693/157731293-1801c237-0d12-41ba-8038-abed2023bedd.png)
+I run verilog to NgSpice Converter to create the model *fahr_rvmyth*
 
-![image](https://user-images.githubusercontent.com/100168693/157731355-4f4859f0-2ddb-4a1c-bf25-3bff452f6f88.png)
+![image](https://user-images.githubusercontent.com/100168693/157900753-eea82b7f-79be-4dc3-8b72-a3f3cd298695.png)
 
-![image](https://user-images.githubusercontent.com/100168693/157731395-4d2c95a9-6723-4114-9ad0-86710f606b74.png)
+
+![image](https://user-images.githubusercontent.com/100168693/157900847-2bcab26d-ba6c-431d-ad20-172cf1b7d94b.png)
+
+
+
+## 2  **Fahr_clk_gen** Circuit  
+  It is a control system that generates an output analog signal of clk  including **Pulse clock generation** subchip .
+ 
+ # Schematic
+  I design a circuit to generate the clk signal by using the subchip clk_pulse_generator from eSim componant library , I generate a verilog module for *Fahr_clk-Gen* 
+  
+ ![image](https://user-images.githubusercontent.com/100168693/157898740-2dd2f6f8-53d1-4550-9041-563e5e67019e.png)
+
+  I put  R1=R2=20K,Vdd=10V,C=0.1u for Simulation the analog output  v(clk)&v(c_out) 
+  v(c_out) the plot at the out of capacitor 
+ 
+ # Simulation
+  ![image](https://user-images.githubusercontent.com/100168693/157899692-51925e6d-af4f-4199-9035-f2db586ef0f3.png)
+ 
+
 
 
 ## 3 *Fahr_10bit_DAC* Circuit 
 A digital-to-analog converter or DAC is a system that converts a digital signal into an analog signal. DACs are widely used in modern communication systems enabling the generation of digitally-defined transmission signals. As a result, high-speed DACs are used for mobile communications and ultra-high-speed DACs are employed in optical communications systems.
 
-![image](https://user-images.githubusercontent.com/100168693/157731598-ed2d0786-6b4d-4ef7-8bee-c0d7bf1389bc.png)
+ I used the subship 10bit_DAC from library to generate a Netlist verilog module of  DAC and obtain the analog v(out) for digital inputs to test it.       
 
-![image](https://user-images.githubusercontent.com/100168693/157731702-384e53de-f0ea-4bb4-8616-d61b5cb57a00.png)
+  **Design Schematic**
 
 ![image](https://user-images.githubusercontent.com/100168693/157731765-49ef2d84-3418-46ea-8ee0-9b800872bf87.png)
 
+  **Calcul**
+
+![image](https://user-images.githubusercontent.com/100168693/157731702-384e53de-f0ea-4bb4-8616-d61b5cb57a00.png)
+
+  **Simulation**
 
 ![image](https://user-images.githubusercontent.com/100168693/157731832-b21646a2-859c-4129-bd4e-13ffef67aa68.png)
+
 
 ![image](https://user-images.githubusercontent.com/100168693/157731890-18928713-1228-4a91-b1a9-cfd5ddbdab85.png)
 
@@ -130,11 +158,12 @@ A digital-to-analog converter or DAC is a system that converts a digital signal 
 
 
 
-REFERENCES
-[1]	https://github.com/vsdip/rvmyth_avsddac_interface
-[2]	https://github.com/vsdip/rvmyth_avsdpll_interface
-[3]	https://esim.fossee.in/circuit-simulation-project/esim-circuit-simulation-run
-[4]	https://hackathon.fossee.in/esim/ 
+
+## * REFERENCES
+### [1]	https://github.com/vsdip/rvmyth_avsddac_interface
+### [2]	https://github.com/vsdip/rvmyth_avsdpll_interface
+### [3]	https://esim.fossee.in/circuit-simulation-project/esim-circuit-simulation-run
+### [4]	https://hackathon.fossee.in/esim/ 
 
 
 
